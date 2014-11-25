@@ -10,24 +10,24 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace DotNetAnalyzers.RoslynExts.CS
 {
-  static class Exts
+  static public class Exts
   {
-    static MethodDeclarationSyntax InWhichMethod(SyntaxNode sn)
+   public  static MethodDeclarationSyntax InWhichMethod(SyntaxNode sn)
     {
       return sn.FirstAncestorOrSelf<MethodDeclarationSyntax>();
     }
 
-    static TypeDeclarationSyntax InWhichTypeDeclaration(SyntaxNode sn)
+    public static TypeDeclarationSyntax InWhichTypeDeclaration(SyntaxNode sn)
     {
       return sn.FirstAncestorOrSelf<TypeDeclarationSyntax>();
     }
 
-    static T ToExpr<T>(this string code) where T : ExpressionSyntax
+    public static T ToExpr<T>(this string code) where T : ExpressionSyntax
     {
       return SyntaxFactory.ParseExpression(code) as T;
     }
 
-    static T ToSExpr<T>(this string code) where T : StatementSyntax
+    public static T ToSExpr<T>(this string code) where T : StatementSyntax
     {
       return SyntaxFactory.ParseStatement(code) as T;
     }

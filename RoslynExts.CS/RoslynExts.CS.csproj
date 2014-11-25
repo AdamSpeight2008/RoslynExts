@@ -8,7 +8,7 @@
     <ProjectGuid>{EBFCACE0-5B03-4919-A945-816F0D47F61B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RoslynExts</RootNamespace>
+    <RootNamespace>DotNetAnalyzers</RootNamespace>
     <AssemblyName>RoslynExts.CS</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>

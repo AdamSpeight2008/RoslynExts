@@ -1,5 +1,6 @@
-﻿Imports System.Reflection
-Imports System.Runtime.InteropServices
+﻿Imports System
+Imports System.Resources
+Imports System.Reflection
 
 ' General Information about an assembly is controlled through the following 
 ' set of attributes. Change these attribute values to modify the information
@@ -7,14 +8,13 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("RoslynExts")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("RoslynExts")>
-<Assembly: AssemblyCopyright("Copyright ©  2014")>
-<Assembly: AssemblyTrademark("")>
-
-<Assembly: ComVisible(False)>
+<Assembly: AssemblyTitle("ClassLibrary1")> 
+<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("ClassLibrary1")> 
+<Assembly: AssemblyCopyright("Copyright ©  2014")> 
+<Assembly: AssemblyTrademark("")> 
+<Assembly: NeutralResourcesLanguage("en")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -27,5 +27,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> 

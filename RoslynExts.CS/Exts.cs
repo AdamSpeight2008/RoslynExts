@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +16,7 @@ namespace DotNetAnalyzers.RoslynExts.CS
     {
       return sn.FirstAncestorOrSelf<MethodDeclarationSyntax>();
     }
-     
+
     static TypeDeclarationSyntax InWhichTypeDeclaration(SyntaxNode sn)
     {
       return sn.FirstAncestorOrSelf<TypeDeclarationSyntax>();

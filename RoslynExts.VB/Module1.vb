@@ -1,4 +1,7 @@
 ﻿Imports System.Runtime.CompilerServices
+Imports Microsoft.CodeAnalysis
+Imports Microsoft.CodeAnalysis.VisualBasic
+Imports Microsoft.CodeAnalysis.VisualBasic.Syntax
 
 Namespace Global.DotNetAnalyzers.RoslynExts
   Namespace VB

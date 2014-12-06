@@ -12,7 +12,7 @@ namespace DotNetAnalyzers.RoslynExts.CS
 {
   static public class Exts
   {
-   public  static MethodDeclarationSyntax InWhichMethod(SyntaxNode sn)
+    public static MethodDeclarationSyntax InWhichMethod(SyntaxNode sn)
     {
       return sn.FirstAncestorOrSelf<MethodDeclarationSyntax>();
     }
@@ -30,6 +30,21 @@ namespace DotNetAnalyzers.RoslynExts.CS
     public static T ToSExpr<T>(this string code) where T : StatementSyntax
     {
       return SyntaxFactory.ParseStatement(code) as T;
+    }
+
+    public static Boolean KindIsAnyOf(SyntaxToken value, params SyntaxKind[] values)
+    {
+      return values.Any(v => value.IsKind(v));
+    }
+    public static T0 WithSameTriviaAs<T0,T1>(this T0 target, T1 source)
+      where T0 : SyntaxNode
+      where T1 : SyntaxNode
+    {
+      if (target == null) throw new ArgumentNullException(nameof(target));
+      if (source == null) throw new ArgumentNullException(nameof(source));
+      return target
+                .WithLeadingTrivia(source.GetLeadingTrivia())
+                .WithTrailingTrivia(source.GetTrailingTrivia());
     }
   }
 }

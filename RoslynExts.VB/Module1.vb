@@ -40,7 +40,16 @@ Namespace Global.DotNetAnalyzers.RoslynExts
         Return target.WithLeadingTrivia(source.GetLeadingTrivia).
                       WithTrailingTrivia(source.GetTrailingTrivia)
       End Function
-      
+
+      <Extension>
+      Public Function [Try](Of T1 As Class)(expr As Object) As T1
+        Return TryCast(expr, T1)
+      End Function
+      <Runtime.CompilerServices.Extension>
+      Public Function [As](Of T1 As Class)(expr As Object) As T1
+        Return DirectCast(expr, T1)
+      End Function
+
     End Module
 
   End Namespace

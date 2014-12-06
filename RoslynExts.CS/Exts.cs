@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace DotNetAnalyzers.RoslynExts.CS
+namespace RoslynExts.CS
 {
   static public class Exts
   {
@@ -26,12 +26,12 @@ namespace DotNetAnalyzers.RoslynExts.CS
 
     public static T ToExpr<T>(this string code) where T : ExpressionSyntax
     {
-      return SyntaxFactory.ParseExpression(code) as T;
+      return ParseExpression(code).As<T>();
     }
 
     public static T ToSExpr<T>(this string code) where T : StatementSyntax
     {
-      return SyntaxFactory.ParseStatement(code) as T;
+      return ParseStatement(code).As<T>();
     }
 
     public static Boolean KindIsAnyOf<T0>(T0 value, params SyntaxKind[] values)

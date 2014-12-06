@@ -29,14 +29,14 @@ Namespace Global.DotNetAnalyzers.RoslynExts
       End Function
 
       <Extension>
-      Public Function KindIsAnyOf(value As SyntaxToken, ParamArray values() As SyntaxKind) As Boolean
+      Public Function KindIsAnyOf(Of T0 As SyntaxNode)(value As T0, ParamArray values() As SyntaxKind) As Boolean
         Return values.Any(Function(v) value.IsKind(v))
       End Function
 
       <Extension>
       Public Function WithSameTriviaAs(Of T0 As SyntaxNode,T1 As SyntaxNode)(target As T0, source As T1) As T0
-        If target Is Nothing Then Throw New ArgumentNullException("target")
-        If source Is Nothing Then Throw New ArgumentNullException("source")
+        If target Is Nothing Then Throw New ArgumentNullException("target") 'NameOf():
+        If source Is Nothing Then Throw New ArgumentNullException("source") 'NameOf():
         Return target.WithLeadingTrivia(source.GetLeadingTrivia).
                       WithTrailingTrivia(source.GetTrailingTrivia)
       End Function

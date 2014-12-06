@@ -32,10 +32,12 @@ namespace DotNetAnalyzers.RoslynExts.CS
       return SyntaxFactory.ParseStatement(code) as T;
     }
 
-    public static Boolean KindIsAnyOf(SyntaxToken value, params SyntaxKind[] values)
+    public static Boolean KindIsAnyOf<T0>(T0 value, params SyntaxKind[] values)
+      where T0 : SyntaxNode 
     {
       return values.Any(v => value.IsKind(v));
     }
+
     public static T0 WithSameTriviaAs<T0,T1>(this T0 target, T1 source)
       where T0 : SyntaxNode
       where T1 : SyntaxNode

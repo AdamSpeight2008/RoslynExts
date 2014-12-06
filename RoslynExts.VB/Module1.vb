@@ -46,9 +46,15 @@ Namespace Global.RoslynExts
       Public Function [Try](Of T1 As Class)(expr As Object) As T1
         Return TryCast(expr, T1)
       End Function
-      <Runtime.CompilerServices.Extension>
+
+      <Extension>
       Public Function [As](Of T1 As Class)(expr As Object) As T1
         Return DirectCast(expr, T1)
+      End Function
+
+      <Extension>
+      Public Function AddEOL(Of T0 As SyntaxNode)(node As T0) As T0
+        Return node.WithTrailingTrivia(SyntaxFactory.SyntaxTrivia(SyntaxKind.EndOfLineTrivia, Environment.NewLine))
       End Function
 
     End Module

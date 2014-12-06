@@ -120,6 +120,10 @@ namespace RoslynExts.CS
       var block = statement.Try<BlockSyntax>();
       return (block == null) ? statement : block.Statements.FirstOrDefault();
     }
-
+     
+      public static T0 AddEOL<T0>(this T0 node) where T0 : SyntaxNode
+    {
+      return node.WithTrailingTrivia(SyntaxTrivia(SyntaxKind.EndOfLineTrivia, "\r\n"));
+    }
   }
 }

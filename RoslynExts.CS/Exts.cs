@@ -9,6 +9,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+using System.Threading;
+using RoslynExts;
 
 namespace RoslynExts.CS
 {
@@ -125,5 +127,97 @@ namespace RoslynExts.CS
     {
       return node.WithTrailingTrivia(SyntaxTrivia(SyntaxKind.EndOfLineTrivia, "\r\n"));
     }
+
+    public static ITypeSymbol ArgumentType(this ArgumentSyntax arg, SemanticModel  sm, CancellationToken ct)
+    {
+      try
+      {
+        return sm.GetTypeInfo(arg.Expression, ct).Type;
+      }
+      catch(Exception e)
+      {
+        return null;
+      }
+    }
+
+    public static IEnumerable<ITypeSymbol> GetArgumentTypes(this ArgumentListSyntax args, SemanticModel sm, CancellationToken ct)
+    {
+      if ((args == null) || (sm == null)) return Enumerable.Empty<ITypeSymbol>();
+      return args.Arguments.Select(arg => arg.ArgumentType(sm, ct));
+    }
+
+    public static IEnumerable<String> GetArgumentTypeNames(this ArgumentListSyntax args, SemanticModel sm, CancellationToken ct)
+    {
+      if ((args == null) || (sm == null)) return Enumerable.Empty<String>();
+      return args.GetArgumentTypes(sm, ct).Select(tsym => tsym == null ? String.Empty : tsym.ToFullyQualifiedName());
+    }
+
+    public static IEnumerable<Object> GetArgumentAsObjects(this ArgumentListSyntax args, SemanticModel sm, CancellationToken ct)
+    {
+      if ((args == null) || (sm == null)) yield break;
+      var ArgTypes = args.GetArgumentTypes(sm, ct).ToArray();
+      for(var i=0; i<args.Arguments.Count(); i++)
+      {
+        object ov=null;
+        var arg = args.Arguments[0].Try<ArgumentSyntax>();//.As<ArgumentSyntax>();
+        var iv = arg?.Expression.Try<IdentifierNameSyntax>();
+        if( iv != null)
+        {
+          ov = iv.IdentifierValue(sm,ct);
+        }
+        else
+        {
+          try
+          {
+
+            ov = Convert.ChangeType(arg.DescendantTokens().First().Value, ArgTypes[i].GetType());
+          }
+          catch(Exception ex)
+          {
+            ov = null;
+          }
+        }
+        yield return ov;
+      }
+
+    }
+
+    public static bool IsExternal<T>(this T sn, SemanticModel sm, CancellationToken ct)
+      where T : SyntaxNode
+    {
+      if ((sn == null) || (sm == null)) return true;
+      return sm.GetSymbolInfo(sn, ct).Symbol.IsExtern;
+    }
+
+    public static object IdentifierValue(this IdentifierNameSyntax id, SemanticModel sm, CancellationToken ct)
+    {
+      if ((id == null) || (sm == null)) return null;
+      var FoundSymbol = sm.LookupSymbols(id.Span.Start, name: id.Identifier.Text)[0];
+      var varDeclSite = FoundSymbol.DeclaringSyntaxReferences[0].GetSyntax().Parent.Try<VariableDeclaratorSyntax>();
+      if (varDeclSite == null) return null;
+      if (varDeclSite.Initializer == null) return null;
+      if (varDeclSite.Initializer.Value == null) return null;
+      var f = varDeclSite.Initializer.Value.DescendantTokens().First();
+      var value = f.Value;
+      var t = value.GetType();
+      return Convert.ChangeType(value, t);
+    }
+
+    public static INamedTypeSymbol CalledOnType(this MemberAccessExpressionSyntax n, SemanticModel sm, CancellationToken ct)
+    {
+      if ((n == null) || (sm == null)) return null;
+      var s = sm.GetSymbolInfo(n, ct).Symbol;
+      return (s == null) ? null : s.ContainingType; 
+    }
+
+    public static string ToFullyQualifiedName(this ISymbol s)
+    {
+      if (s == null) return String.Empty;
+      return s.ToDisplayString(new SymbolDisplayFormat(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces));
+    }
+
+
+
+
   }
 }

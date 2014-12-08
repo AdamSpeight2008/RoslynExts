@@ -7,6 +7,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "RoslynExts.VB", "RoslynExts
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoslynExts.CS", "RoslynExts.CS\RoslynExts.CS.csproj", "{EBFCACE0-5B03-4919-A945-816F0D47F61B}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "RoslynExts.Any", "RoslynExts.Any\RoslynExts.Any.vbproj", "{368B156D-36F4-4159-9B68-B7173D16F33A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EBFCACE0-5B03-4919-A945-816F0D47F61B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBFCACE0-5B03-4919-A945-816F0D47F61B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBFCACE0-5B03-4919-A945-816F0D47F61B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{368B156D-36F4-4159-9B68-B7173D16F33A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{368B156D-36F4-4159-9B68-B7173D16F33A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{368B156D-36F4-4159-9B68-B7173D16F33A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{368B156D-36F4-4159-9B68-B7173D16F33A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
